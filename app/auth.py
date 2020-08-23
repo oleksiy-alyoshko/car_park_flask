@@ -38,7 +38,6 @@ def register():
             user = User(email=email, password=generate_password_hash(password))
             db.add(user)
             db.commit()
-            import pdb; pdb.set_trace()
             return redirect(url_for('auth.login'))
 
         flash(error)
@@ -76,7 +75,7 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = db_session.query(User).filter(User.user_id == user_id).first()
+        g.user = db_session.query(User).filter(User.id == user_id).first()
 
 
 @bp.route('/logout')

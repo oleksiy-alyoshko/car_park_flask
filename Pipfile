@@ -18,6 +18,7 @@ Flask-Migrate = "*"
 Flask-Cors = "*"
 smartcar = "*"
 black = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.7"
