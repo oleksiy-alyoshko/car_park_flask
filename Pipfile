@@ -17,7 +17,6 @@ Flask = "*"
 Flask-Migrate = "*"
 Flask-Cors = "*"
 smartcar = "*"
-black = "*"
 python-dotenv = "*"
 
 [requires]
