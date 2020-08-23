@@ -1,0 +1,23 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+werkzeug = "*"
+sqlalchemy = "*"
+click = "*"
+"psycopg2" = "*"
+gunicorn = "*"
+Flask-SQLAlchemy = "*"
+Flask-Bcrypt = "*"
+Flask = "*"
+Flask-Migrate = "*"
+Flask-Cors = "*"
+smartcar = "*"
+black = "*"
+
+[requires]
+python_version = "3.7"
