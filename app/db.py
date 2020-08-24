@@ -7,7 +7,7 @@ import click
 from flask import current_app
 from flask.cli import with_appcontext
 
-engine = create_engine(current_app.config['DATABASE_URI'],
+engine = create_engine(current_app.config['DATABASE_URL'],
                        convert_unicode=True,
                        **current_app.config['DATABASE_CONNECT_OPTIONS'])
 db_session = scoped_session(sessionmaker(autocommit=False,

@@ -1,4 +1,5 @@
 import smartcar
+import os
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
@@ -17,6 +18,7 @@ client = smartcar.AuthClient(
            'read_battery', 'read_engine_oil'],
     test_mode=True,
 )
+
 
 @bp.route('/')
 def index():
