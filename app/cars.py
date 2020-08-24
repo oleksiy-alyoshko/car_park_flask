@@ -1,17 +1,26 @@
+import smartcar
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
 from werkzeug.exceptions import abort
 
 from app.auth import login_required
-from app.db import get_db
+from app.db import db_session, Car
 
-bp = Blueprint('blog', __name__)
+bp = Blueprint('cars', __name__)
 
+client = smartcar.AuthClient(
+    client_id=os.environ.get('CLIENT_ID'),
+    client_secret=os.environ.get('CLIENT_SECRET'),
+    redirect_uri=os.environ.get('REDIRECT_URI'),
+    scope=['required:read_vehicle_info', 'read_vin', 'required:read_location', 'read_odometer', 'read_fuel',
+           'read_battery', 'read_engine_oil'],
+    test_mode=True,
+)
 
 @bp.route('/')
 def index():
-    db = get_db()
+    db = db_session
     posts = db.execute(
         'SELECT p.id, title, body, created, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
@@ -20,10 +29,11 @@ def index():
     return render_template('blog/index.html', posts=posts)
 
 
-@bp.route('/create', methods=('GET', 'POST'))
+@bp.route('/add', methods=('GET', 'POST'))
 @login_required
-def create():
+def add():
     if request.method == 'POST':
+
         title = request.form['title']
         body = request.form['body']
         error = None

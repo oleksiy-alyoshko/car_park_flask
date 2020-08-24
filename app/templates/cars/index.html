@@ -3,12 +3,12 @@
 {% block header %}
   <h1>{% block title %}Posts{% endblock %}</h1>
   {% if g.user %}
-    <a class="action" href="{{ url_for('blog.create') }}">New</a>
+    <a class="action" href="{{ url_for('cars.add') }}">Add Cars</a>
   {% endif %}
 {% endblock %}
 
 {% block content %}
-  {% for post in posts %}
+  {% for car in cars %}
     <article class="post">
       <header>
         <div>
