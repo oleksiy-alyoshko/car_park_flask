@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Car Park - {{ car.u_id }}{% endblock %}
+
+{% block page_content %}
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAToB0LPzssKMpLrEnb3058CH2iN7QQrjs&callback=initMap"
+        type="text/javascript"></script>
+    <script type="text/javascript">
+    let map;
+
+function initMap() {
+  const mapOptions = {
+    zoom: 12,
+    center: { lat: {{ car.lat }}, lng: {{ car.lng }} }
+  };
+  map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  const marker = new google.maps.Marker({
+    position: { lat: {{ car.lat }}, lng: {{ car.lng }} },
+    map: map
+  });
+  const infowindow = new google.maps.InfoWindow({
+    content: "<p>{{ car.full_name }} Location:" + marker.getPosition() + "</p>"
+  });
+  google.maps.event.addListener(marker, "click", () => {
+    infowindow.open(map, marker);
+  });
+}
+
+    </script>
+    <h1>{{ car.full_name }}</h1>
+    <div id="map" style="width:100%; height:500px;"></div>
+{% endblock %}

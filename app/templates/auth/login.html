@@ -1,15 +1,16 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-{% block header %}
-  <h1>{% block title %}Log In{% endblock %}</h1>
-{% endblock %}
+{% block title %}Car Park - Login{% endblock %}
 
-{% block content %}
-  <form method="post">
-    <label for="email">Email</label>
-    <input name="email" id="email" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <input type="submit" value="Log In">
-  </form>
+{% block page_content %}
+<div class="page-header">
+    <h1>Login</h1>
+</div>
+<div class="col-md-4">
+    {{ wtf.quick_form(form) }}
+    <br>
+    <p>Forgot your password? <a href="{{ url_for('auth.password_reset_request') }}">Click here to reset it</a>.</p>
+    <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
+</div>
 {% endblock %}

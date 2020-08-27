@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block title %}Car Park{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>{% if current_user.is_authenticated %}List of cars{% else %}Welcome to Car Park Web Application!{% endif %}</h1>
+</div>
+{% if current_user.is_authenticated %}
+    <ul class="cars">
+        {% for car in cars %}
+            <li class="car">
+                <div class="car-full-name">{{ car.full_name }}</div>
+                <a href="{{ url_for('.car', car_id=car.id) }}" class="btn btn-primary" role="button">Manage Car</a>
+            </li>
+            {% if not loop.last %}
+                <hr>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
